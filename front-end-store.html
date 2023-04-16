@@ -1,0 +1,967 @@
+<!DOCTYPE html><html><head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Better 4 U</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&amp;display=swap" rel="stylesheet"/>
+
+
+    <style>
+        #main{
+            position: absolute;
+            left: 50%;
+            margin-left: -170px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropbtn {
+            font-family: 'Jost', sans-serif;
+            width: 350px;
+            font-size: 24px;
+            border: none;
+            padding: 16px;
+            cursor: pointer;
+
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            font-family: 'Jost', sans-serif;
+            font-size: 20px;
+            width: 350px;
+            display: none;
+            position: absolute;
+            background-color:rgba(249, 249, 249,1);
+            min-width: 100px;
+            height: 500px;
+            overflow: auto;
+            z-index: 1;
+            text-align: center;
+            
+        }
+
+        .show {display: block;}
+        #chips{
+            background-color: rgba(255, 89, 94,0.9)
+        }
+        #candy{
+            background-color: rgba(249, 220, 92,1)
+        }
+        #chocolates{
+            background-color: rgba(244, 96, 54,0.9)
+        }
+        #drinks{
+            background-color: rgba(55, 114, 255, 0.9)
+        }
+        #essence{
+            background-color: rgba(244, 144, 137,1)
+        }
+        #cart{
+            background-color: rgba(91, 192, 235,1)
+        }
+        #read{
+            background-color: rgba(211, 208, 203,0.9)
+        }
+
+        .image{
+            height: 250px;
+            width: 250px;
+            margin-bottom: 5px;
+        }
+
+        .item{
+            background-color: rgba(127, 200, 248,1);
+            margin: 1em;
+            border-radius: 1em;
+            padding-bottom: 10px;
+            padding-top: 2px;
+        }
+
+        .add_to_cart{
+            width: 50%;
+            height: 50px;
+            font-family: 'Jost', sans-serif;
+            font-size: 20px;
+            margin-top: 20px;
+            background-color: rgba(14, 173, 105,1);
+            border:none;
+            border-radius: 15px;
+        }
+
+   
+        #var-select{
+            
+            height: 40px;
+            line-height: 1.65;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            border: 1px solid #eee;
+            font-family: 'Jost', sans-serif;
+            font-size: 18px; 
+        }
+
+        /* input[type=number] {
+            width: 30px;
+            height: 30px;
+            line-height: 1.65;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            border: 1px solid #eee;
+            font-family: 'Jost', sans-serif;
+            font-size: 18px;   
+        }
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        } */
+
+        .q_table{
+            margin: 0 auto;
+            width: 90%;
+            height: 50px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .q_table td{
+            margin: 50px;
+            background-color: rgba(90, 169, 230,0.8);
+            border-radius: 15px;
+            padding: 5px;
+            width: 30%;
+        }
+
+
+        .price_table{
+            width: 100%;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .price_table td{
+            margin: 50px;
+            background-color: rgba(90, 169, 230,0.8);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .price_table td:hover{
+            cursor: pointer;
+        }
+        
+
+        .balance_div{
+            display: flex;
+            overflow: hidden;   
+            width: 100%;  
+            height: 40px;   
+            line-height: 40px;
+            
+        }
+
+        #cart_table{
+            padding-top:30px;
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #cart_table tr:nth-child(even) {
+            background-color: rgba(91, 192, 235,1)
+        }
+
+        #cart_table td{
+            text-align: center;
+            width: 30%;
+        }
+
+        .remove_btn{
+            height: 40px;
+            background-color: rgba(255, 89, 94,0.9);
+            border:none;
+            border-radius: 15px;
+        }
+
+
+    </style>
+
+		</head>
+<body>
+    <div id="main">
+        
+        <div class="dropdown">
+            <button onclick="dropDown(event)" id="chips" class="dropbtn">Chips</button>
+            <div id="chips_div">
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="dropDown(event)" id="candy" class="dropbtn">Candy</button>
+            <div id="candy_div">
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="dropDown(event)" id="chocolates" class="dropbtn">Chocolates</button>
+            <div id="chocolates_div">
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="dropDown(event)" id="drinks" class="dropbtn">Drinks</button>
+            <div id="drinks_div">
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="dropDown(event)" id="essence" class="dropbtn">Essentials</button>
+            <div id="essence_div">
+            </div>
+        </div>
+
+        <div class="dropdown">
+                <button onclick="dropDown(event)" id="cart" class="dropbtn">Cart</button>
+                <div id="cart_div" class="dropdown-content">
+                    <table id="cart_table">
+                    </table>
+                </div>
+            </div>
+    </div>
+    
+    <script>
+
+function dropDown(event) {
+        switch(event.target.id){
+            case "chips":
+                toggleDrop(event.target, chips)
+            break;
+            case "candy":
+                toggleDrop(event.target, candys)
+            break;
+            case "chocolates":
+                toggleDrop(event.target, choco)
+            break;
+            case "drinks":
+                toggleDrop(event.target, drinks)
+            break;
+            case "essence":
+                toggleDrop(event.target, essence)
+            break;
+            case "cart":
+                toggleDrop(event.target, "cart")
+            break;
+        }
+    }
+
+    function toggleDrop(e, type = null){
+        if(!e.classList.contains("pressed")){
+            createDropContent(e.id+"_div", type)
+            e.classList.toggle('pressed')
+        }else{
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            if(e.id=="cart") document.getElementById(e.id+"_div").classList.remove("show")
+            else document.getElementById(e.id+"_div").innerHTML = ""
+            e.classList.remove('pressed')
+        }
+    }
+
+    function createDropContent(id, type){
+        var parent = document.getElementById(id);
+        var div = create("div", "dropdown-content");
+        div.classList.toggle("show");
+        var items = [];
+
+        if(type!="cart"){
+            type.forEach(i => {
+                let item = createItem(createMunch(i));
+                div.appendChild(item);
+            });
+            parent.appendChild(div);
+        }
+        else if(type=="cart"){
+            var drop = document.getElementById("cart_div")
+            drop.classList.toggle("show")
+        }
+    }
+
+    function create(type, cname = "", text = ""){
+        var elem = document.createElement(type);
+        if(cname!="") elem.classList.add(cname);
+        if(text!="") elem.innerText = text;
+        return elem;
+    }
+
+    function createMunch(a){
+        
+        let o = {
+            title: a[0],
+            sizes: a[1],
+            prices: a[2],
+            variants: a[3],
+            images: a[4]
+        };
+        return o;
+    }
+
+    function createItem(obj){
+        let title = create("h3", "title", obj.title);
+        let item = create("div", "item");
+
+        let image = create("img", "image");
+        str = obj.title.replace(/\s+/g, '');
+        item.id = str;
+        image.id = str+"_image";
+        var button = makeButton(str+"_btn")
+
+        var select = createOptionsMenu(obj)
+        var q_select = createQtyMenu(obj.title)
+        
+        var table = create("table", "q_table");
+        let rowCount = table.rows.length;
+        let row = table.insertRow(rowCount);
+        row.style.marginBottom = '20px';
+
+        let cell_price = row.insertCell(0);
+        cell_price.id = str+"_price";
+        let cell_qty = row.insertCell(0);
+        let cell_type_select = row.insertCell(0);
+
+        cell_type_select.innerHTML = select;
+        cell_qty.innerHTML = q_select;
+        cell_price.innerText = "";
+
+
+        title.id = str+"_title"
+        item.appendChild(title)
+        item.appendChild(image)
+        item.appendChild(table)
+        item.innerHTML+=button;
+
+                
+        return item;
+    }
+
+
+    function createOptionsMenu(obj){
+        var self = this;
+        //combine object sizes and types, assign image values to select options
+        var id = obj.title.replace(/\s+/g, '')+"_select"
+        var select = `<select id=`+id+"_type"+` class = "type_select" onchange = selectChange(this) >`
+        obj.variants.forEach(v => {
+            for (let i = 0; i < obj.sizes.length; i++) {
+                let option;
+                for (let y = 0; y < obj.images.length; y++) {
+                    var im = obj.images[y].split("*");
+                    if(im[1]+im[2]==obj.sizes[i]+v){
+                        option = `<option value = `+obj.sizes[i].replace(/\s+/g, '')+"*"+obj.prices[i].toString()+"*"+im[3]+`>`+obj.sizes[i]+" "+v+`</option>`
+                    }
+                }
+                select += option;
+            }
+        });
+        select+=`</select>` 
+        return select;
+    }
+    
+    function createQtyMenu(title){
+        var select = `<select id = `+title.replace(/\s+/g, '')+"_select_qty"+` class = "q_select" onchange = selectChange(this) >`
+        let option;
+        for(var i=1;i<10;i++){
+            option = `<option value = `+i+`>`+i+`</option>`
+            select+=option
+        }
+        select+=`</select>`
+        return select;
+    }
+
+    function selectChange(t){
+        if(t.className=="type_select"){
+            let values = t.value.split("*")
+            let current = document.getElementById(t.id.split("_")[0])
+            current.querySelectorAll("img")[0].src = values[2]
+            let qty = current.querySelectorAll("select.q_select")
+
+            let td_price = document.getElementById(current.id+"_price")
+            td_price.innerText = qty[0].value*Number(values[1])+"$";
+        }
+        else{
+            let current = document.getElementById(t.id.split("_")[0])
+            let td_price = document.getElementById(current.id+"_price")
+            let pr = current.querySelectorAll("select.type_select")[0].value.split("*")[1];
+            td_price.innerText = t.value*Number(pr)+"$";
+        }
+    }
+
+    function removeItem(event){
+        let row = document.getElementById("row"+event.target.id)
+        row.parentNode.removeChild(row)
+    }
+
+    function makeButton(id){
+        return `<button id ="`+id+`" onclick = "addToCart(event)" class = "add_to_cart">Add To Cart</button>`;
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.matches('.remove_btn') && !event.target.className.includes('_select') && !event.target.matches('.price_data') && !event.target.matches('.price_data') && !event.target.matches('.add_to_cart') && !event.target.matches('.inp') && !event.target.matches('.item')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var drops = document.getElementsByClassName("dropbtn pressed");
+            for (var i = 0; i < drops.length; i++) {
+                drops[i].classList.remove("pressed")
+            }
+            for (var i = 0; i < dropdowns.length; i++) {
+                if (dropdowns[i].classList.contains('show')) {
+                    if(dropdowns[i].id=="cart_div") dropdowns[i].classList.remove("show")
+                    else dropdowns[i].parentNode.innerHTML="";
+                }
+            }
+        }
+
+        if(event.target.matches('.dropbtn')){
+            Array.from(document.getElementsByClassName("pressed")).map((e)=>{
+                if(e.id!=event.target.id) toggleDrop(e)
+                })
+        }
+
+        if(event.target.className.includes("dropbtn")&&event.target.classList.contains("pressed")){
+            setTimeout(function(){ 
+                Array.from(document.querySelectorAll(".item")).forEach(item => {
+                        let select = (item.querySelectorAll("select"))
+                        let opts = select[0].value.split("*")
+                        item.querySelectorAll("img")[0].src = opts[2];
+                        let qty_value = select[1].value;
+                        let price = (document.getElementById(item.querySelectorAll(".title")[0].innerText.replace(/\s+/g, '')+"_price"))
+                        price.innerText = qty_value*Number(opts[1])+"$"
+                });
+            }, 100);
+        }
+    }
+
+    function addToCart(event){
+        var out = [];
+        if(event.target.parentNode.className=="item"){
+            let that = ["_title", "_select_type", "_select_qty", "_price"];
+            for(var i=0;i<that.length;i++){
+                let item = document.getElementById(event.target.id.split("_")[0]+that[i])
+                if(item.className.includes("_select")) out.push(item.options[item.selectedIndex].text);
+                else out.push(item.innerText);
+            }
+        }
+        event.target.innerText = "Added To Cart!"
+        event.target.disabled = true
+        event.target.style.backgroundColor = "rgb(211, 208, 203)"
+
+        setTimeout(() => {
+            event.target.innerText = "Add To Cart"
+            event.target.disabled = false
+            event.target.style.backgroundColor = "rgb(14, 173, 105)"
+        }, 1500);
+        ct(out)
+    }
+
+
+
+    function ct(t){
+        let table = document.getElementById("cart_table")
+        let rowCount = table.rows.length;
+        let row = table.insertRow(rowCount);
+        row.id = "row"+rowCount;
+        let cell_remove = row.insertCell(0);
+        let cell_title = row.insertCell(0);
+        let cell_type = row.insertCell(0);
+        let cell_price = row.insertCell(0);
+        cell_title.innerText = t[3]
+        cell_type.innerText = t[2]+" "+t[1]
+        cell_price.innerText = t[0];
+        cell_remove.innerHTML = `<button id="`+rowCount+`" class = "remove_btn" onclick="removeItem(event)">Remove</button>`
+    }
+
+        const chips = [
+        ["Doritos", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 5
+         ],
+         //variants
+         [
+             "OG", "Ranch"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Doritos*Small*OG*https://images-na.ssl-images-amazon.com/images/I/71MQeIS7FAL._SL1500_.jpg",
+             "Doritos*Large*OG*https://i5.walmartimages.ca/images/Enlarge/426/560/6000201426560.jpg",
+             "Doritos*Small*Ranch*https://images-na.ssl-images-amazon.com/images/I/71f-iLZUs6L._SL1000_.jpg",
+             "Doritos*Large*Ranch*https://images-na.ssl-images-amazon.com/images/I/81nfmUmU2qL._SL1500_.jpg"
+         ],
+        ],
+        ["Lays", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 5
+         ],
+         //variants
+         [
+             "Classic", "BBQ"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Lays*Small*Classic*https://images-na.ssl-images-amazon.com/images/I/81vJyb43URL._SL1500_.jpg",
+             "Lays*Large*Classic*https://www.dollargeneral.com/media/catalog/product/cache/0729a8e318a86bbdd225c6c8aa5967a3/0/0/00028400199148_0.jpg",
+             "Lays*Small*BBQ*https://images-na.ssl-images-amazon.com/images/I/61-ij0RKryL._SL1202_.jpg",
+             "Lays*Large*BBQ*https://mobileimages.lowes.com/product/converted/028400/028400092258.jpg?size=xl"
+         ],
+        ],
+        ["Sun Chips", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 5
+         ],
+         //variants
+         [
+             "Cheddar",
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Sun Chips*Small*Cheddar*https://images-na.ssl-images-amazon.com/images/I/51tHGa7LuNL._SX425_.jpg",
+             "Sun Chips*Large*Cheddar*https://i5.walmartimages.ca/images/Enlarge/162/318/6000200162318.jpg",
+         ],
+        ],
+    ];
+
+    const candys = [
+        ["M&Ms", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 5
+         ],
+         //variants
+         [
+             "Yellow", "Chocolate"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "M&Ms*Small*Yellow*https://www.resnickdistributors.com/assets/1/19/DimRegular/a4deaa4eeb784a4595e604502c0330ea1.PNG?3926",
+             "M&Ms*Large*Yellow*https://i5.walmartimages.ca/images/Enlarge/141/758/6000199141758.jpg",
+             "M&Ms*Small*Chocolate*https://u5j4h3u7.stackpathcdn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/0/5/05547_a.jpg",
+             "M&Ms*Large*Chocolate*https://i5.walmartimages.ca/images/Enlarge/140/922/6000199140922.jpg"
+         ],
+        ], 
+
+        ["Skittles", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 5
+         ],
+         //variants
+         [
+             "Classic", "Sour"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Skittles*Small*Classic*https://cdn.shopify.com/s/files/1/1382/5547/products/14049.jpg?v=1552400415",
+             "Skittles*Large*Classic*https://i5.walmartimages.ca/images/Enlarge/657/7_1/999999-58496896577_1.jpg",
+             "Skittles*Small*Sour*https://images-na.ssl-images-amazon.com/images/I/61%2BqnnIwv0L._SL1000_.jpg",
+             "Skittles*Large*Sour*https://i5.walmartimages.ca/images/Enlarge/110/938/110938.jpg"
+         ],
+        ], 
+
+        ["Halls", 
+         //sizes
+         [
+             "Regular"
+         ],
+         //prices
+         [
+             3, 3
+         ],
+         //variants
+         [
+             "Honey", "Cherry"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Halls*Regular*Honey*https://cdn-tp1.mozu.com/24871-37656/cms/37656/files/7538dd60-9221-47d4-bc39-3a148d36fe38",
+             "Halls*Regular*Cherry*https://i5.walmartimages.com/asr/01ed2496-4671-48b3-8bce-eff76c7beeac_1.e8bbc43a285b246a3494a16b0ffc076c.jpeg"
+         ],
+        ],
+    ];
+
+
+    const choco = [
+        ["Snickers", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 4
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Snickers*Small**https://images.contentstack.io/v3/assets/blt068dbc54bf4fc7ed/bltb63a052e81711a4a/5db82ae00b39e86c2f83f75d/snickers.jpg",
+             "Snickers*Large**https://richmedia.ca-richimage.com/ImageDelivery/imageService?profileId=12026539&id=1853618&recipeId=500",
+         ],
+        ], 
+
+        ["Twix", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 4
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Twix*Small**https://images.heb.com/is/image/HEBGrocery/000121394",
+             "Twix*Large**https://richmedia.channeladvisor.com/ImageDelivery/imageService?profileId=12026539&id=1853621&recipeId=500",
+         ],
+        ], 
+
+        ["Mars", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 4
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Mars*Small**https://u5j4h3u7.stackpathcdn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/9/9/99491_a.jpg",
+             "Mars*Large**https://richmedia.channeladvisor.com/ImageDelivery/imageService?profileId=12026539&id=1853622&recipeId=500",
+         ],
+        ],
+
+        ["Kit Kat", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             3, 4
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Kit Kat*Small**https://i5.walmartimages.ca/images/Enlarge/609/024/6000200609024.jpg",
+             "Kit Kat*Large**hhttps://www.bigw.com.au/medias/sys_master/images/images/h8e/hb6/12103030734878.jpg",
+         ],
+        ],
+    ];
+
+    const drinks = [
+        ["Coke", 
+         //sizes
+         [
+             "Can",
+             "Bottle",
+             "Party",
+         ],
+         //prices
+         [
+             2, 3, 5
+         ],
+         //variants
+         [
+             "Classic", "Diet"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Coke*Can*Classic*https://cdn.shopify.com/s/files/1/1509/5104/products/818i_2BQm07UL._SL1500_1024x1024.jpg?v=1530943896",
+             "Coke*Bottle*Classic*https://lh3.googleusercontent.com/proxy/VxH_Th_rAIdx05asWrLXIflKwhCEINt4VwQWgxOtWude3gfyPg3ofctNsOTkY70N3gMpH2YCc6_JkyI2bG8G8RdjrfY07uvMHafenVYpapho68LaXIl6mDsjAWEGjKFZoe0u6k1B3oT5zBt8RMuccf5aJUqq-yuXmV5_cKfNy-kxr76C7QXRmjZgwb8icOdrnw",
+             "Coke*Party*Classic*https://cdn0.woolworths.media/content/wowproductimages/large/271707.jpg",
+             "Coke*Can*Diet*https://yalesaloon.com/wp-content/uploads/2020/04/diet-coke.jpeg",
+             "Coke*Bottle*Diet*https://images-na.ssl-images-amazon.com/images/I/612fGPOtTUL._SL1500_.jpg",
+             "Coke*Party*Diet*https://i5.walmartimages.ca/images/Enlarge/155/390/155390.jpg",
+         ],
+        ], 
+
+        ["Nestea", 
+         //sizes
+         [
+             "Can",
+             "Bottle"
+         ],
+         //prices
+         [
+             2, 5
+         ],
+         //variants
+         [
+             "Classic"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Nestea*Can*Classic*https://cdn.shopify.com/s/files/1/2206/5873/products/Nestea-Lemon-iced-tea.jpg?v=1571439136",
+             "Nestea*Bottle*Classic*https://az836796.vo.msecnd.net/media/image/product/en/large/0008390000626.jpg",
+         ],
+        ], 
+
+        ["Ginger Ale", 
+         //sizes
+         [
+             "Can",
+             "Party"
+         ],
+         //prices
+         [
+             2, 5
+         ],
+         //variants
+         [
+             "Classic"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Ginger Ale*Can*Classic*https://assets.shop.loblaws.ca/products_jpeg/20307569004/en/20307569004_lrg_1_@1x.jpg",
+             "Ginger Ale*Party*Classic*https://i5.walmartimages.ca/images/Enlarge/128/619/128619.jpg",
+         ],
+        ],
+
+        ["Arizona", 
+         //sizes
+         [
+             "The Can"
+         ],
+         //prices
+         [
+             4,
+         ],
+         //variants
+         [
+             "Classic"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Arizona*The Can*Classic*https://images.heb.com/is/image/HEBGrocery/001071026",
+         ],
+        ],
+    ];
+
+    const essence = [
+        ["Zig Zags", 
+         //sizes
+         [
+             "OG",
+             "King Size"
+         ],
+         //prices
+         [
+             4, 5
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "Zig Zags*OG**https://cdn.shopify.com/s/files/1/0949/0404/products/zig_2_2048x.jpg?v=1574381358",
+             "Zig Zags*King Size**https://www.hippiebutler.com/wp-content/uploads/2018/06/Zig-Zag-King-Size-2.jpg",
+         ],
+        ], 
+
+        ["RAW", 
+         //sizes
+         [
+             "Classic",
+             "1 1/4",
+             "King Size"
+         ],
+         //prices
+         [
+             4, 5, 6
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "RAW*Classic**https://thealterednative.com/wp-content/uploads/2017/05/Raw-Classic-KS.jpg",
+             "RAW*1 1/4**https://bestbudsforever.ca/wp-content/uploads/2017/10/Raw-Classic-125.jpg",
+             "RAW*King Size**https://thealterednative.com/wp-content/uploads/2017/05/Raw-Classic-KS.jpg",
+             
+         ],
+        ], 
+
+        ["OCB", 
+         //sizes
+         [
+             "OG",
+             "King Size"
+         ],
+         //prices
+         [
+             4, 6
+         ],
+         //variants
+         [
+             ""
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "OCB*OG**https://cdn.shopify.com/s/files/1/2160/5629/products/OCB_Rolling_Papers_-_Premium_Range_1024x.png?v=1546480420",
+             "OCB*King Size**https://www.puffpipes.ca/assets/images/product-large/ocbking_large.jpg",
+         ],
+        ],
+
+        ["You Might Have Lost Yours", 
+         //sizes
+         [
+             "Small",
+             "Large"
+         ],
+         //prices
+         [
+             2, 3
+         ],
+         //variants
+         [
+             "Black", 
+             "Blue",
+             "Red"
+         ],
+         //images
+         //og small
+             //og large 
+             //ranch small
+             //ranch large
+         [
+             "You Might Have Lost Yours*Small*Black*https://cdn.shopify.com/s/files/1/1971/3159/products/Bic-Mini-Lighter-Black-Edit_2000x.jpg?v=1563404642",
+             "You Might Have Lost Yours*Small*Blue*https://cdn3.volusion.com/fscwp.utjhn/v/vspfiles/photos/703324DRKBL-8.jpg?v-cache=1575294778",
+             "You Might Have Lost Yours*Small*Red*https://d1s3se1tv47vh9.cloudfront.net/media/catalog/product/s/e/seq464_red_186c_464_31_2.jpg",
+
+             "You Might Have Lost Yours*Large*Black*https://cdn11.bigcommerce.com/s-lj4uix26h6/images/stencil/500x659/products/52444/68829/BIC-SLIM__68950.1582657940.jpg?c=2",
+             "You Might Have Lost Yours*Large*Blue*https://cdn.shopify.com/s/files/1/2206/5873/products/UJHYujiORGmvqg5Zx3M5_Bic_20Lighter.png?v=1572897403",
+             "You Might Have Lost Yours*Large*Red*https://i.pinimg.com/originals/0c/b4/83/0cb4832592bd672da92a223db7faaf61.jpg",
+         ],
+        ],
+    ];
+
+</script>
+
+
+
+</body></html>
